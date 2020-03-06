@@ -6,6 +6,7 @@ const UserResponseMapper = require("../mapping/userMapper/response/userResponseM
 const _userService = new UserService()
 
 exports.getAll = (req, res, next) => {
+    const a = req.user;
     res.status(200).json(
         [
             {
