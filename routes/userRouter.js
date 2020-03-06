@@ -1,10 +1,10 @@
 const express = require('express');
-const feedController = require("../controllers/userController");
+const userController = require("../controllers/userController");
 const createUserValidator = require('../DTO/validators/createUserResponseValidator')
 const router = express.Router();
 
-router.get('/', feedController.getAll);
-router.get('/:id', feedController.getById);
-router.post('/', createUserValidator ,feedController.create);
+router.get('/', userController.getAll);
+router.get('/:id', userController.getById);
+router.post('/', createUserValidator ,userController.create);
 
 module.exports = router;

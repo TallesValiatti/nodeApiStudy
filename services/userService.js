@@ -10,8 +10,8 @@ class UserService {
         console.log("Get user by id: " + id);
     }
 
-    create() {
-        console.log("Create user");
+    create(model) {
+        console.log("Create user:"  + model);
     }
 }
 

@@ -1,8 +1,8 @@
 class Result {
 
-    Ok(erro, msg, data)
+    Ok(data)
     {
-        this.erro = erro,
+        this.erro = false,
         this.message = [],
         this.data = data
     }

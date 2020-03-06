@@ -1,6 +1,8 @@
 const { check, validationResult } = require('express-validator');
 const Result  = require('../DTO/shared/result')
 const UserService = require("../services/userService");
+const UserMapper = require('../mapping/userMapper/userMapper');
+const UserResponseMapper = require("../mapping/userMapper/response/userResponseMapper")
 const _userService = new UserService()
 
 exports.getAll = (req, res, next) => {
@@ -35,26 +37,21 @@ exports.create = (req, res, next) => {
     //validator
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-
         result.InvalidRequestData(errors.array());
         return res.status(200).json(result);
     }
-    
-    //extract the new data
-    const name = req.body.name;
-    const password = req.body.password; 
+
+    //request to model
+    const model = UserMapper(req.body);
 
     //save the new user
-    _userService.create();
+    _userService.create(model);
+ 
+    //create response user
+    const modelResponse = UserResponseMapper(model);
 
-    //return thew value
-    const array = [];
-    array.push({
-        "name": name,
-        "password":password
-    });
     //create the result
-    result.Ok(false, "", array);
+    result.Ok(modelResponse);
 
     res.status(200).json(result);
 };
